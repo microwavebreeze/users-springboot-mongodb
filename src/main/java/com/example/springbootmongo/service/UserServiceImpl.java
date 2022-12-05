@@ -28,11 +28,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String save(User user) {
-        return userRepository.save(user).getPersonId();
+        return userRepository.save(user).getUserId();
     }
 
     @Override
-    public List<User> getPersonWithStartWith(String name) {
+    public List<User> getUserWithStartWith(String name) {
         return userRepository.findByFirstNameStartsWithIgnoreCase(name);
     }
 
@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getByPersonAge(Integer minAge, Integer maxAge) {
-        return userRepository.findPersonByAgeBetween(minAge, maxAge);
+    public List<User> getByUserAge(Integer minAge, Integer maxAge) {
+        return userRepository.findUserByAgeBetween(minAge, maxAge);
     }
 
     @Override
@@ -76,20 +76,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Document> getOldestPersonByCity() {
+    public List<Document> getOldestUserByCity() {
         UnwindOperation unwindOperation
                 = Aggregation.unwind("addresses");
         SortOperation sortOperation
                 = Aggregation.sort(Sort.Direction.DESC, "age");
         GroupOperation groupOperation
-                = Aggregation.group("addresses.city").first(Aggregation.ROOT).as("oldestPerson");
+                = Aggregation.group("addresses.city").first(Aggregation.ROOT).as("oldestUser");
         Aggregation aggregation
                 = Aggregation.newAggregation(unwindOperation, sortOperation, groupOperation);
 
-        List<Document> person
+        List<Document> user
                 = mongoTemplate.aggregate(aggregation, User.class, Document.class).getMappedResults();
 
-        return person;
+        return user;
     }
 
     @Override

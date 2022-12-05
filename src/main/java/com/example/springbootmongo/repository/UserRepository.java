@@ -16,5 +16,5 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     @Query(value = "{'age' : {$gt : ?0, $lt : ?1}}",
     fields ="{addresses: 0}")
-    List<User> findPersonByAgeBetween(Integer min, Integer max);
+    List<User> findUserByAgeBetween(Integer min, Integer max);
 }

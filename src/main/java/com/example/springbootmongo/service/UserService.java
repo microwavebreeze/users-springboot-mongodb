@@ -10,15 +10,15 @@ import java.util.List;
 public interface UserService {
     String save(User user);
 
-    List<User> getPersonWithStartWith(String name);
+    List<User> getUserWithStartWith(String name);
 
     void delete(String id);
 
-    List<User> getByPersonAge(Integer minAge, Integer maxAge);
+    List<User> getByUserAge(Integer minAge, Integer maxAge);
 
     Page<User> search(String name, Integer minAge, Integer maxAge, String city, Pageable pageable);
 
-    List<Document> getOldestPersonByCity();
+    List<Document> getOldestUserByCity();
 
     List<Document> getPopulationByCity();
 

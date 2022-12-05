@@ -24,8 +24,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getPersonStartwith(@RequestParam("name") String name) {
-        return userService.getPersonWithStartWith(name);
+    public List<User> getUserStartWith(@RequestParam("name") String name) {
+        return userService.getUserWithStartWith(name);
     }
 
     @DeleteMapping("/{id}")
@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> getAllPersons() {
+    public List<User> getAllUsers() {
         return userService.findAll();
     }
 
@@ -44,12 +44,12 @@ public class UserController {
     }
 
     @GetMapping("/age")
-    public List<User> getByPersonAge(@RequestParam Integer minAge, @RequestParam Integer maxAge) {
-        return userService.getByPersonAge(minAge, maxAge);
+    public List<User> getByUserAge(@RequestParam Integer minAge, @RequestParam Integer maxAge) {
+        return userService.getByUserAge(minAge, maxAge);
     }
 
     @GetMapping("/search")
-    public Page<User> searchPerson(
+    public Page<User> searchUser(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Integer minAge,
             @RequestParam(required = false) Integer maxAge,
@@ -63,8 +63,8 @@ public class UserController {
     }
 
     // by city
-    @GetMapping("/oldestperson")
-    public List<Document> getOldestPerson() {
-        return userService.getOldestPersonByCity();
+    @GetMapping("/oldestuser")
+    public List<Document> getOldestUser() {
+        return userService.getOldestUserByCity();
     }
 }
